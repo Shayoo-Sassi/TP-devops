@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # FastAPI backend service
+  backend:
+    image: shayoossi/crud-spring:latest
+      
+      
+    ports:
+      - "8000:8000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/courses?useSSL=false&allowPublicKeyRetrieval=true
+
+    depends_on:
+      - mysql
+
+  # Angular frontend service
+   
+
+  frontend:
+    image: shayoossi/crud-angular:latest
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  # Mysql service
+  mysql:
+    image: mysql:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mysql-data:/data/db
+
+volumes:
+  mysql-data:

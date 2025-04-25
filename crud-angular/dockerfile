@@ -1,5 +1,5 @@
 # Stage 1: Build the React application
-FROM node:20 AS builder
+FROM node:19.2.7-alpine AS builder
 
 # Set the working directory
 WORKDIR /app
@@ -15,10 +15,10 @@ RUN npm install --save-dev @types/node && \
 # Copy the rest of the application code
 COPY . .
 
-# Build the React application
+# Build the application
 RUN npm run build
 
-# Stage 2: Serve the React application using nginx
+# Stage 2: Serve the application using nginx
 FROM nginx:alpine
 
 # Copy the build output from the builder stage
