@@ -3,7 +3,9 @@ version: '3.8'
 services:
   # FastAPI backend service
   backend:
-    image: shayoossi/crud-spring:latest
+    build: 
+      context: ./crud-spring
+      dockerfile: Dockerfile
       
       
     ports:
@@ -18,7 +20,9 @@ services:
    
 
   frontend:
-    image: shayoossi/crud-angular:latest
+    build:
+      context: ./crud-angular
+      dockerfile: Dockerfile
     ports:
       - "3000:80"
     depends_on:
