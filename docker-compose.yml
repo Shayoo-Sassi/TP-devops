@@ -13,12 +13,16 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mysql-data:/data/db
-      
+    networks:
+      - app-network
+
   # FastAPI backend service
   backend:
     build: 
       context: ./crud-spring
       dockerfile: Dockerfile
+    networks:
+      - app-network
       
       
     ports:
@@ -47,6 +51,8 @@ services:
       - backend
 
  
-
+networks:
+  app-network:
+    driver: bridge
 volumes:
   mysql-data:
